@@ -48,15 +48,16 @@ x = torch.randn(batch_size, 1,112,112, requires_grad=True)
 torch_out = torch_model(x)
 
 print("[-] torch model:\t{}".format(torch_model))
-for i, layer in enumerate(torch_model.modules()):
-	print("layer {}:\t{}".format(i, layer))
-for i, name in enumerate(torch_model.state_dict()):
-	print("state_dict {}:\t{}".format(i, name))
+#for i, layer in enumerate(torch_model.modules()):
+#	print("layer {}:\t{}".format(i, layer))
+#for i, name in enumerate(torch_model.state_dict()):
+#	print("state_dict {}:\t{}".format(i, name))
 for i, (name,param) in enumerate(torch_model.named_parameters()):
 	print("named_parameters {}:\t{}".format(i, name))
 
 torch.onnx.export(torch_model, x, "sr.onnx", 
-	export_params=True, opset_version=10, do_constant_folding=True, 
+	#export_params=True, opset_version=10, do_constant_folding=True, 
+	export_params=True, opset_version=10, verbose=True, do_constant_folding=True, 
 	input_names = ['hello'], output_names = ['world'], 
 	#input_names = ['input'], output_names = ['output'], 
 	#dynamic_axes = {'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}})
