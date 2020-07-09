@@ -11,5 +11,10 @@ onnx.checker.check_model(model)
 onnx.helper.printable_graph(model.graph)
 
 ort_session = ort.InferenceSession(filename)
-outputs = ort_session.run(None, {input_name: np.random.randn(1, 1, 112, 112).astype(np.float32)})
+outputs = ort_session.run(None, {
+	input_name: np.random.randn(1, 1, 112, 112).astype(np.float32)
+})
 print(outputs[0])
+
+# usage
+# python validate-onnx.py
